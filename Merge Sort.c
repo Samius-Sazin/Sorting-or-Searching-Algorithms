@@ -1,15 +1,44 @@
 #include<stdio.h>
 
-void MergeSort(int *arr, int si, int ei)
+void Merge_Sort(int *arr, int si, int ei);
+void Merge(int *arr, int si, int mid, int ei);
+
+int main()
 {
-    if(si >= ei) return;
-    int mid = si+ (ei-si)/2; //(si + ei)/2
-    MergeSort(arr, si, mid);
-    MergeSort(arr, mid+1, ei);
-    merge(arr, si, mid, ei);
+    int n;
+    printf("Enter Array Size : ");
+    scanf("%d",&n);
+
+    int arr[n];
+    printf("Enter value : ");
+    for(int i=0; i<n; i++)
+        scanf("%d",&arr[i]);
+
+    Merge_Sort(arr,0,n-1);
+
+    printf("sorted   : ");
+    for(int i=0; i<n; i++)
+        printf("%d ",arr[i]);
+
+    return 0;
 }
 
-void merge(int *arr, int si, int mid, int ei)
+void Merge_Sort(int *arr, int si, int ei)
+{
+    if(si >= ei)
+    {
+        return;
+    }
+
+    int mid = si+ (ei-si)/2; //(si + ei)/2
+
+    Merge_Sort(arr, si, mid);
+    Merge_Sort(arr, mid+1, ei);
+    Merge(arr, si, mid, ei);
+}
+
+//Function for merge
+void Merge(int *arr, int si, int mid, int ei)
 {
     int i, j, k;
     i = si;
@@ -52,25 +81,3 @@ void merge(int *arr, int si, int mid, int ei)
 
     return;
 }
-
-int main()
-{
-    int n;
-    printf("Enter Array Size : ");
-    scanf("%d",&n);
-
-    int arr[n];
-    printf("Enter value : ");
-    for(int i=0; i<n; i++)
-        scanf("%d",&arr[i]);
-
-    MergeSort(arr,0,n-1);
-
-    printf("sorted   : ");
-    for(int i=0; i<n; i++)
-        printf("%d ",arr[i]);
-
-    return 0;
-}
-
-
